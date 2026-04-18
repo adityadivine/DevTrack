@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DevTrack Dashboard</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<!-- ===================== NAVBAR ===================== -->
+	<header class="navbar">
+		<div class="nav-container">
+			<div class="logo">🚀 Dev<span>Track</span></div>
+			<nav>
+				<a href="#">Dashboard</a>
+				<a href="#">Profile</a>
+				<a href="#">Logout</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="dashboard">
+
+		<div class="container">
+
+			<!-- Message -->
+			<p id="message" class="message"></p>
+
+			<!-- ===================== FORMS ===================== -->
+			<section class="forms-section">
+
+				<div class="card">
+					<h2>Add DSA Entry</h2>
+
+					<form id="dsa-form">
+						<label>Problem Name</label>
+						<input type="text" id="problem" required placeholder="Two Sum">
+
+						<label>Platform</label>
+						<input type="text" id="platform" required placeholder="LeetCode">
+
+						<label>Difficulty</label>
+						<select id="difficulty" required>
+							<option value="">Select difficulty</option>
+							<option>Easy</option>
+							<option>Medium</option>
+							<option>Hard</option>
+						</select>
+
+						<button type="submit">Add Entry</button>
+					</form>
+				</div>
+
+				<div class="card">
+					<h2>Add Application</h2>
+
+					<form id="app-form">
+						<label>Company</label>
+						<input type="text" id="company" required placeholder="Google">
+
+						<label>Role</label>
+						<input type="text" id="role" required placeholder="SDE">
+
+						<label>Status</label>
+						<select id="status" required>
+							<option value="">Select status</option>
+							<option>Applied</option>
+							<option>OA</option>
+							<option>Interview</option>
+						</select>
+
+						<button type="submit">Add Application</button>
+					</form>
+				</div>
+
+			</section>
+
+			<!-- ===================== DATA ===================== -->
+			<section class="data-section">
+
+				<div class="card">
+					<h2>DSA Entries</h2>
+					<ul id="dsa-list"></ul>
+				</div>
+
+				<div class="card">
+					<h2>Applications</h2>
+					<ul id="app-list"></ul>
+				</div>
+
+			</section>
+
+		</div>
+	</main>
+
+	<footer class="footer">
+		<p>© 2026 DevTrack Dashboard</p>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>
