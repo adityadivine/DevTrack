@@ -63,11 +63,20 @@ app.get("/", function (req, res) {
 });
 
 // User registration route
+// For simplicity, we're not validating input here (not recommended for production)
+const bcrypt = require("bcrypt");
+// In production, you should validate email format, password strength, etc.
 app.post("/register", async function (req, res) {
 
     const { name, email, password } = req.body;
 
-    const user = new User({ name, email, password });
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = new User({
+        name,
+        email,
+        password: hashedPassword
+    });
 
     await user.save();
 
@@ -82,9 +91,15 @@ app.post("/login", async function (req, res) {
 
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email, password });
+    const user = await User.findOne({ email });
 
     if (!user) {
+        return res.status(401).send("Invalid credentials");
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
         return res.status(401).send("Invalid credentials");
     }
 
