@@ -1,3 +1,4 @@
+
 /* ===================== RESET ===================== */
 * {
 	margin: 0;
@@ -17,7 +18,6 @@ body {
 .navbar {
 	background: #161f30;
 	color: white;
-	padding: 0;
 	border-bottom: 3px solid #3d6fa8;
 }
 
@@ -34,7 +34,6 @@ body {
 .logo {
 	font-size: 17px;
 	font-weight: 700;
-	letter-spacing: 0.4px;
 	color: #fff;
 }
 
@@ -47,8 +46,6 @@ body {
 	margin-left: 28px;
 	text-decoration: none;
 	font-size: 13.5px;
-	font-weight: 500;
-	letter-spacing: 0.2px;
 }
 
 .navbar a:hover {
@@ -62,24 +59,23 @@ body {
 	color: white;
 	padding: 90px 20px 100px;
 	text-align: center;
+	position: relative;
+	overflow: hidden; /* 🔥 FIXES BLUE BUG */
 }
 
 .hero h1 {
 	font-size: 40px;
-	font-weight: 700;
 	margin-bottom: 14px;
-	letter-spacing: -0.5px;
 }
 
 .hero p {
 	font-size: 17px;
 	margin-bottom: 28px;
 	color: #aec6e8;
-	max-width: 520px;
-	margin-left: auto;
-	margin-right: auto;
 }
 
+
+/* ===================== BUTTON ===================== */
 .cta-btn {
 	display: inline-block;
 	padding: 13px 30px;
@@ -88,34 +84,10 @@ body {
 	border-radius: 8px;
 	text-decoration: none;
 	font-weight: 700;
-	font-size: 14px;
-	letter-spacing: 0.3px;
-	box-shadow: 0 4px 16px rgba(0,0,0,0.2);
 }
 
 .cta-btn:hover {
 	background: #e8f0fb;
-}
-
-
-/* ===================== CONTAINER ===================== */
-.container {
-	max-width: 1100px;
-	margin: 0 auto;
-	padding: 40px 20px;
-}
-
-
-/* ===================== SECTIONS ===================== */
-section {
-	margin-bottom: 60px;
-}
-
-h2 {
-	margin-bottom: 20px;
-	font-size: 22px;
-	font-weight: 700;
-	color: #1e2d40;
 }
 
 
@@ -133,155 +105,10 @@ h2 {
 
 .feature-card {
 	background: white;
-	padding: 24px 20px;
-	border-radius: 12px;
-	box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-	text-align: left;
-	border-top: 3px solid #3d6fa8;
-}
-
-.feature-card h3 {
-	font-size: 16px;
-	margin-bottom: 8px;
-	color: #1e2d40;
-}
-
-.feature-card p {
-	font-size: 14px;
-	color: #5a6a7a;
-	line-height: 1.5;
-}
-
-
-/* ===================== CARDS ===================== */
-.card {
-	background: white;
 	padding: 24px;
 	border-radius: 12px;
 	box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-	border: 1px solid #e8eef5;
-}
-
-
-/* ===================== FORMS ===================== */
-form {
-	display: flex;
-	flex-direction: column;
-}
-
-label {
-	margin-bottom: 5px;
-	font-weight: 600;
-	font-size: 13px;
-	color: #3a4a5c;
-	letter-spacing: 0.1px;
-}
-
-input,
-select {
-	padding: 10px 12px;
-	margin-bottom: 14px;
-	border-radius: 8px;
-	border: 1.5px solid #d8e2ee;
-	font-size: 14px;
-	background: #fbfcfe;
-	color: #2d3a4a;
-}
-
-input:focus,
-select:focus {
-	outline: none;
-	border-color: #3d6fa8;
-	background: #fff;
-	box-shadow: 0 0 0 3px rgba(61,111,168,0.1);
-}
-
-
-/* ===================== BUTTONS ===================== */
-
-/* Default buttons (forms) */
-form button {
-	padding: 11px;
-	border: none;
-	background: #2c4f82;
-	color: white;
-	border-radius: 8px;
-	cursor: pointer;
-	font-size: 14px;
-	font-weight: 600;
-	width: 100%;
-	letter-spacing: 0.3px;
-}
-
-form button:hover {
-	background: #1e3a6e;
-}
-
-
-/* Action buttons (Edit/Delete) */
-li button {
-	width: auto;
-	padding: 5px 12px;
-	font-size: 12.5px;
-	margin-right: 6px;
-	margin-top: 8px;
-	display: inline-block;
-	border-radius: 6px;
-	font-weight: 600;
-	letter-spacing: 0.2px;
-}
-
-
-/* Edit button */
-li button:first-of-type {
-	background: #3d6fa8;
-}
-
-li button:first-of-type:hover {
-	background: #2c4f82;
-}
-
-
-/* Delete button */
-li button:last-of-type {
-	background: #d64045;
-}
-
-li button:last-of-type:hover {
-	background: #b03035;
-}
-
-
-/* ===================== GRID LAYOUT ===================== */
-.forms-section,
-.data-section {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 20px;
-}
-
-
-/* ===================== LIST ===================== */
-ul {
-	list-style: none;
-}
-
-li {
-	background: #f7f9fc;
-	padding: 13px 14px;
-	border-radius: 8px;
-	margin-bottom: 10px;
-	border: 1px solid #e4ecf4;
-}
-
-li strong {
-	font-size: 15px;
-	color: #1e2d40;
-}
-
-li small {
-	color: #7a8a9a;
-	font-size: 12.5px;
+	border-top: 3px solid #3d6fa8;
 }
 
 
@@ -294,96 +121,120 @@ li small {
 	border-radius: 14px;
 	box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 	border: 1px solid #e8eef5;
+
+	position: relative;
+	overflow: hidden; /* 🔥 PREVENT ANY LEAK */
 }
 
 
-/* ===================== ABOUT ===================== */
-.about {
-	text-align: center;
-	max-width: 700px;
-	margin: auto;
-}
-
-.about p {
-	color: #5a6a7a;
-	font-size: 15px;
-}
-
-
-/* ===================== AUTH PAGE ===================== */
-.auth-page {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 80vh;
-	padding: 20px;
-}
-
-.auth-container {
-	display: flex;
-	width: 880px;
-	background: white;
-	border-radius: 16px;
-	box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-	overflow: hidden;
-	border: 1px solid #e0e8f0;
-}
-
-.auth-info {
-	background: linear-gradient(160deg, #2c4f82, #1a2f54);
-	color: white;
-	padding: 48px 40px;
-	flex: 1;
+/* ===================== FORM ===================== */
+form {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 }
 
-.auth-info h1 {
-	font-size: 26px;
-	font-weight: 700;
+label {
+	margin-bottom: 5px;
+	font-weight: 600;
+	font-size: 13px;
+}
+
+input {
+	padding: 10px 12px;
 	margin-bottom: 14px;
-	letter-spacing: -0.3px;
-}
-
-.auth-info p {
-	color: #aec6e8;
-	font-size: 14.5px;
-	line-height: 1.65;
-}
-
-.auth-card {
-	padding: 48px 40px;
-	flex: 1;
-}
-
-.auth-card h2 {
-	margin-bottom: 24px;
-}
-
-.auth-switch {
-	margin-top: 14px;
-	font-size: 13.5px;
-	color: #5a6a7a;
-}
-
-.auth-switch a {
-	color: #3d6fa8;
-	font-weight: 600;
-	text-decoration: none;
-}
-
-.auth-switch a:hover {
-	text-decoration: underline;
-}
-
-
-/* ===================== MESSAGE ===================== */
-.message {
-	color: #2a7a4b;
-	margin-bottom: 15px;
-	font-weight: 600;
+	border-radius: 8px;
+	border: 1.5px solid #d8e2ee;
 	font-size: 14px;
+	background: #fbfcfe;
+}
+
+input:focus {
+	outline: none;
+	border-color: #3d6fa8;
+	box-shadow: 0 0 0 3px rgba(61,111,168,0.1);
+}
+
+
+/* ===================== BUTTON ===================== */
+form button {
+	padding: 11px;
+	border: none;
+	background: #2c4f82;
+	color: white;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+form button:hover {
+	background: #1e3a6e;
+}
+
+
+/* ===================== PASSWORD FIELD ===================== */
+.password-wrapper {
+	position: relative;
+	width: 100%;
+}
+
+.password-wrapper input {
+	width: 100%;
+	padding: 10px 50px 10px 12px; /* 🔥 correct spacing */
+}
+
+/* 🔥 PERFECT EYE BUTTON */
+
+.eye-btn {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%) scale(1);
+
+	background: transparent; /* 🔥 no blue box */
+	border: none;
+	cursor: pointer;
+
+	font-size: 18px;
+	line-height: 1;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	color: #555;
+
+	transition: transform 0.15s ease;
+}
+
+/* ✅ ONLY grow */
+.eye-btn:hover {
+	transform: translateY(-50%) scale(1.15);
+}
+
+/* click feedback */
+.eye-btn:active {
+	transform: translateY(-50%) scale(0.95);
+}
+
+/* remove all weird focus/hover effects */
+.eye-btn:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+
+/* ===================== TEXT ===================== */
+.hint {
+	color: #666;
+	font-size: 12px;
+	margin-bottom: 10px;
+}
+
+.error {
+	color: red;
+	font-size: 12px;
+	margin-bottom: 10px;
 }
 
 
@@ -395,79 +246,37 @@ li small {
 	padding: 18px;
 	margin-top: 40px;
 	font-size: 13px;
-	border-top: 1px solid #263040;
 }
 
+/* 🔥 FORCE CLEAN ICON BUTTON */
+.password-wrapper .eye-btn {
+	all: unset; /* 💥 resets EVERYTHING */
 
-/* ===================== RESPONSIVE ===================== */
-@media (max-width: 768px) {
-
-	.features-grid {
-		grid-template-columns: 1fr;
-	}
-
-	.forms-section,
-	.data-section {
-		grid-template-columns: 1fr;
-	}
-
-	.auth-container {
-		flex-direction: column;
-		width: 100%;
-	}
-}
-/* // ===================== ERROR & HINT =====================  */
-.error {
-	color: red;
-	font-size: 12px;
-	margin-bottom: 10px;
-	display: block;
-}
-
-.hint {
-	color: #666;
-	font-size: 12px;
-	margin-bottom: 10px;
-	display: block;
-}
-
-.password-wrapper {
-	position: relative;
-	display: flex;
-	align-items: center;
-}
-
-.password-wrapper input {
-	width: 100%;
-	padding: 10px 45px 10px 10px;
-}
-
-.password-wrapper button {
 	position: absolute;
 	right: 12px;
 	top: 50%;
-	transform: translateY(-50%);  /* 🔥 this is key */
-
-	background: none;
-	border: none;
-	padding: 0;
-	width: auto;
+	transform: translateY(-50%) scale(1);
 
 	cursor: pointer;
-	font-size: 16px;
-	display: flex;              /* 🔥 helps alignment */
-	align-items: center;        /* 🔥 vertical center inside button */
-	justify-content: center;
-}
 
-.password-wrapper button:hover {
-	color: #000;
-}
-
-.hint {
-	margin-top: -5px;
-	margin-bottom: 10px;
-}
-.password-wrapper button {
+	font-size: 18px;
 	line-height: 1;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	color: #555;
+
+	transition: transform 0.15s ease;
+}
+
+/* hover = only grow */
+.password-wrapper .eye-btn:hover {
+	transform: translateY(-50%) scale(1.15);
+}
+
+/* click */
+.password-wrapper .eye-btn:active {
+	transform: translateY(-50%) scale(0.95);
 }

@@ -1,3 +1,4 @@
+
 // ===================== HELPERS =====================
 
 function isValidEmail(email) {
@@ -14,9 +15,9 @@ function getToken() {
 	return localStorage.getItem("token");
 }
 
-// 🔥 Centralized API handler
-function fetchWithAuth(url, options = {}) {
+// ===================== API HANDLER =====================
 
+function fetchWithAuth(url, options = {}) {
 	const token = getToken();
 
 	return fetch(url, {
@@ -27,13 +28,11 @@ function fetchWithAuth(url, options = {}) {
 		}
 	})
 	.then(res => {
-
 		if (res.status === 401) {
 			localStorage.removeItem("token");
 			window.location.href = "login.html";
 			throw new Error("Unauthorized");
 		}
-
 		return res.json();
 	});
 }
@@ -49,13 +48,10 @@ if (form) {
 
 	if (togglePassword && passwordInput) {
 		togglePassword.addEventListener("click", function () {
-			if (passwordInput.type === "password") {
-				passwordInput.type = "text";
-				togglePassword.textContent = "🙈";
-			} else {
-				passwordInput.type = "password";
-				togglePassword.textContent = "👁";
-			}
+			passwordInput.type =
+				passwordInput.type === "password" ? "text" : "password";
+			togglePassword.textContent =
+				passwordInput.type === "text" ? "🙈" : "👁";
 		});
 	}
 
@@ -117,7 +113,6 @@ if (registerForm) {
 		error.style.color = strong ? "green" : "#e84118";
 	});
 
-	// Toggle password
 	const togglePassword = document.getElementById("toggle-password");
 	const passwordInput = document.getElementById("password");
 
@@ -130,7 +125,6 @@ if (registerForm) {
 		});
 	}
 
-	// Toggle confirm password
 	const toggleConfirm = document.getElementById("toggle-confirm");
 	const confirmInput = document.getElementById("confirm-password");
 
@@ -255,6 +249,8 @@ if (appForm) {
 
 function renderDSA() {
 	const list = document.getElementById("dsa-list");
+	if (!list) return;
+
 	list.innerHTML = "";
 
 	fetchWithAuth("http://localhost:3000/dsa").then(data => {
@@ -293,6 +289,8 @@ function renderDSA() {
 
 function renderApps() {
 	const list = document.getElementById("app-list");
+	if (!list) return;
+
 	list.innerHTML = "";
 
 	fetchWithAuth("http://localhost:3000/applications").then(data => {
@@ -331,10 +329,51 @@ function renderApps() {
 
 // ===================== INIT =====================
 
-renderDSA();
-renderApps();
-
-function logout() {
-	localStorage.removeItem("token");
-	window.location.href = "login.html";
+if (document.getElementById("dsa-list")) {
+	renderDSA();
 }
+
+if (document.getElementById("app-list")) {
+	renderApps();
+}
+
+// ===================== GOOGLE LOGIN =====================
+
+window.onload = function () {
+
+	const el = document.getElementById("google-btn");
+	if (!el) return;
+
+	google.accounts.id.initialize({
+		client_id: "687404951517-hjh5oo43hd3mlbba5j2gnn5d1149i01n.apps.googleusercontent.com",
+		callback: handleGoogleLogin
+	});
+
+	google.accounts.id.renderButton(el, {
+		theme: "outline",
+		size: "large"
+	});
+};
+
+function handleGoogleLogin(response) {
+
+	const googleToken = response.credential;
+
+	fetch("http://localhost:3000/auth/google", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({ token: googleToken })
+	})
+	.then(res => {
+		if (!res.ok) throw new Error("Google login failed");
+		return res.json();
+	})
+	.then(data => {
+		localStorage.setItem("token", data.token);
+		window.location.href = "dashboard.html";
+	})
+	.catch(() => alert("Google login failed"));
+}
+
