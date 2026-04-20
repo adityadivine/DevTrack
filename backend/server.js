@@ -70,6 +70,16 @@ app.post("/register", async function (req, res) {
 
     const { name, email, password } = req.body;
 
+    if (!name || !email || !password) {
+		return res.status(400).send("Missing fields");
+	}
+
+    const existing = await User.findOne({ email });
+
+    if (existing) {
+        return res.status(400).send("User already exists");
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new User({
@@ -91,6 +101,10 @@ app.post("/login", async function (req, res) {
 
     const { email, password } = req.body;
 
+    if (!email || !password) {
+		return res.status(400).send("Missing fields");
+	}
+
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -105,7 +119,8 @@ app.post("/login", async function (req, res) {
 
     const token = jwt.sign(
         { userId: user._id },
-        process.env.JWT_SECRET
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
     );
 
     res.json({ token });
@@ -129,9 +144,15 @@ function authMiddleware(req, res, next) {
         req.user = decoded; // 🔥 contains userId
 
         next();
-    } catch (err) {
-        return res.status(401).send("Invalid token");
-    }
+    } 
+    catch (err) {
+
+	if (err.name === "TokenExpiredError") {
+		return res.status(401).send("Token expired");
+	}
+
+	return res.status(401).send("Invalid token");
+}
 }
 
 

@@ -1,4 +1,5 @@
-// ===================== HELPER =====================
+// ===================== HELPERS =====================
+
 function isValidEmail(email) {
 	const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	return regex.test(email);
@@ -13,13 +14,37 @@ function getToken() {
 	return localStorage.getItem("token");
 }
 
+// 🔥 Centralized API handler
+function fetchWithAuth(url, options = {}) {
+
+	const token = getToken();
+
+	return fetch(url, {
+		...options,
+		headers: {
+			...(options.headers || {}),
+			"Authorization": "Bearer " + token
+		}
+	})
+	.then(res => {
+
+		if (res.status === 401) {
+			localStorage.removeItem("token");
+			window.location.href = "login.html";
+			throw new Error("Unauthorized");
+		}
+
+		return res.json();
+	});
+}
+
 // ===================== LOGIN =====================
 
 const form = document.getElementById("login-form");
 
 if (form) {
 
-    const togglePassword = document.getElementById("toggle-password");
+	const togglePassword = document.getElementById("toggle-password");
 	const passwordInput = document.getElementById("password");
 
 	if (togglePassword && passwordInput) {
@@ -33,7 +58,7 @@ if (form) {
 			}
 		});
 	}
-    
+
 	form.addEventListener("submit", function (event) {
 		event.preventDefault();
 
@@ -45,16 +70,14 @@ if (form) {
 			return;
 		}
 
-        if (!isValidEmail(email)) {
-	        alert("Enter a valid email.");
-	        return;
-        }
+		if (!isValidEmail(email)) {
+			alert("Enter a valid email.");
+			return;
+		}
 
 		fetch("http://localhost:3000/login", {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
+			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ email, password })
 		})
 		.then(res => {
@@ -75,63 +98,51 @@ const registerForm = document.getElementById("register-form");
 
 if (registerForm) {
 
-    document.getElementById("email").addEventListener("input", function () {
-		const emailError = document.getElementById("email-error");
-
-		emailError.textContent = isValidEmail(this.value)
-			? ""
-			: "Invalid email format";
+	document.getElementById("email").addEventListener("input", function () {
+		document.getElementById("email-error").textContent =
+			isValidEmail(this.value) ? "" : "Invalid email format";
 	});
 
 	document.getElementById("password").addEventListener("input", function () {
-		const passwordError = document.getElementById("password-error");
+		const error = document.getElementById("password-error");
 
 		if (!this.value) {
-			passwordError.textContent = "";
-            passwordError.style.color = "#e84118";
+			error.textContent = "";
+			error.style.color = "#e84118";
 			return;
 		}
 
-		passwordError.textContent = isStrongPassword(this.value)
-			? "Strong password ✔"
-			: "Weak password";
-
-		passwordError.style.color = isStrongPassword(this.value)
-			? "green"
-			: "#e84118";
+		const strong = isStrongPassword(this.value);
+		error.textContent = strong ? "Strong password ✔" : "Weak password";
+		error.style.color = strong ? "green" : "#e84118";
 	});
 
-        // Toggle main password
-    const togglePassword = document.getElementById("toggle-password");
-    const passwordInput = document.getElementById("password");
+	// Toggle password
+	const togglePassword = document.getElementById("toggle-password");
+	const passwordInput = document.getElementById("password");
 
-    if (togglePassword && passwordInput) {
-        togglePassword.addEventListener("click", function () {
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                togglePassword.textContent = "🙈";
-            } else {
-                passwordInput.type = "password";
-                togglePassword.textContent = "👁";
-            }
-        });
-    }
+	if (togglePassword && passwordInput) {
+		togglePassword.addEventListener("click", function () {
+			passwordInput.type =
+				passwordInput.type === "password" ? "text" : "password";
+			togglePassword.textContent =
+				passwordInput.type === "text" ? "🙈" : "👁";
+		});
+	}
 
-    // Toggle confirm password
-    const toggleConfirm = document.getElementById("toggle-confirm");
-    const confirmInput = document.getElementById("confirm-password");
+	// Toggle confirm password
+	const toggleConfirm = document.getElementById("toggle-confirm");
+	const confirmInput = document.getElementById("confirm-password");
 
-    if (toggleConfirm && confirmInput) {
-        toggleConfirm.addEventListener("click", function () {
-            if (confirmInput.type === "password") {
-                confirmInput.type = "text";
-                toggleConfirm.textContent = "🙈";
-            } else {
-                confirmInput.type = "password";
-                toggleConfirm.textContent = "👁";
-            }
-        });
-    }
+	if (toggleConfirm && confirmInput) {
+		toggleConfirm.addEventListener("click", function () {
+			confirmInput.type =
+				confirmInput.type === "password" ? "text" : "password";
+			toggleConfirm.textContent =
+				confirmInput.type === "text" ? "🙈" : "👁";
+		});
+	}
+
 	registerForm.addEventListener("submit", function (event) {
 		event.preventDefault();
 
@@ -140,48 +151,38 @@ if (registerForm) {
 		const password = document.getElementById("password").value.trim();
 		const confirmPassword = document.getElementById("confirm-password").value.trim();
 
-		const nameError = document.getElementById("name-error");
-        const emailError = document.getElementById("email-error");
-        const passwordError = document.getElementById("password-error");
-        const confirmError = document.getElementById("confirm-error");
+		if (!name || !email || !password || !confirmPassword) {
+			alert("Please fill all fields.");
+			return;
+		}
 
-        nameError.textContent = "";
-        emailError.textContent = "";
-        passwordError.textContent = "";
-        confirmError.textContent = "";
+		if (!isValidEmail(email)) {
+			document.getElementById("email-error").textContent =
+				"Enter a valid email";
+			return;
+		}
 
-        if (!name || !email || !password || !confirmPassword) {
-            alert("Please fill all fields.");
-            return;
-        }
+		if (!isStrongPassword(password)) {
+			document.getElementById("password-error").textContent =
+				"Min 8 chars with letters & numbers";
+			return;
+		}
 
-        if (!isValidEmail(email)) {
-            emailError.textContent = "Enter a valid email (example: user@email.com)";
-            return;
-        }
-
-        if (!isStrongPassword(password)) {
-            passwordError.textContent = "Minimum 8 characters, include letters and numbers";
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            confirmError.textContent = "Passwords do not match";
-            return;
-        }
+		if (password !== confirmPassword) {
+			document.getElementById("confirm-error").textContent =
+				"Passwords do not match";
+			return;
+		}
 
 		fetch("http://localhost:3000/register", {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
-			},
+			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ name, email, password })
 		})
 		.then(() => {
 			alert("Registered successfully");
 			window.location.href = "login.html";
-		})
-		.catch(err => console.log(err));
+		});
 	});
 }
 
@@ -193,209 +194,136 @@ if (window.location.pathname.includes("dashboard.html")) {
 	}
 }
 
-// ===================== DSA FORM =====================
+// ===================== LOGOUT =====================
+
+function logout() {
+	localStorage.removeItem("token");
+	window.location.href = "login.html";
+}
+
+// ===================== DSA =====================
 
 const dsaForm = document.getElementById("dsa-form");
 
 if (dsaForm) {
-	dsaForm.addEventListener("submit", function (event) {
-		event.preventDefault();
+	dsaForm.addEventListener("submit", function (e) {
+		e.preventDefault();
 
-		const problem = document.getElementById("problem").value.trim();
-		const platform = document.getElementById("platform").value.trim();
-		const difficulty = document.getElementById("difficulty").value;
-
-		if (!problem || !platform || !difficulty) {
-			alert("Please fill all fields.");
-			return;
-		}
-
-		const dsaEntry = {
+		const data = {
 			id: Date.now(),
-			problem,
-			platform,
-			difficulty
+			problem: problem.value,
+			platform: platform.value,
+			difficulty: difficulty.value
 		};
 
-		fetch("http://localhost:3000/dsa", {
+		fetchWithAuth("http://localhost:3000/dsa", {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				"Authorization": "Bearer " + getToken()
-			},
-			body: JSON.stringify(dsaEntry)
-		})
-		.then(() => renderDSA())
-		.catch(err => console.log(err));
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(data)
+		}).then(renderDSA);
 
 		dsaForm.reset();
 	});
 }
 
-// ===================== APPLICATION FORM =====================
+// ===================== APPLICATIONS =====================
 
 const appForm = document.getElementById("app-form");
 
 if (appForm) {
-	appForm.addEventListener("submit", function (event) {
-		event.preventDefault();
+	appForm.addEventListener("submit", function (e) {
+		e.preventDefault();
 
-		const company = document.getElementById("company").value.trim();
-		const role = document.getElementById("role").value.trim();
-		const status = document.getElementById("status").value;
-
-		if (!company || !role || !status) {
-			alert("Please fill all fields.");
-			return;
-		}
-
-		const appEntry = {
+		const data = {
 			id: Date.now(),
-			company,
-			role,
-			status
+			company: company.value,
+			role: role.value,
+			status: status.value
 		};
 
-		fetch("http://localhost:3000/applications", {
+		fetchWithAuth("http://localhost:3000/applications", {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				"Authorization": "Bearer " + getToken()
-			},
-			body: JSON.stringify(appEntry)
-		})
-		.then(() => renderApps())
-		.catch(err => console.log(err));
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(data)
+		}).then(renderApps);
 
 		appForm.reset();
 	});
 }
 
-// ===================== RENDER DSA =====================
+// ===================== RENDER =====================
 
 function renderDSA() {
-
 	const list = document.getElementById("dsa-list");
 	list.innerHTML = "";
 
-	fetch("http://localhost:3000/dsa", {
-		headers: {
-			"Authorization": "Bearer " + getToken()
-		}
-	})
-	.then(res => res.json())
-	.then(data => {
-
-		if (data.length === 0) {
-			const li = document.createElement("li");
-			li.textContent = "No DSA entries yet";
-			list.appendChild(li);
-			return;
-		}
-
+	fetchWithAuth("http://localhost:3000/dsa").then(data => {
 		data.forEach(item => {
 
 			const li = document.createElement("li");
 
-			const editBtn = document.createElement("button");
-			editBtn.textContent = "Edit";
+			const edit = document.createElement("button");
+			edit.textContent = "Edit";
 
-			const delBtn = document.createElement("button");
-			delBtn.textContent = "Delete";
+			const del = document.createElement("button");
+			del.textContent = "Delete";
 
-			delBtn.onclick = () => {
-				fetch(`http://localhost:3000/dsa/${item.id}`, {
-					method: "DELETE",
-					headers: {
-						"Authorization": "Bearer " + getToken()
-					}
+			del.onclick = () =>
+				fetchWithAuth(`http://localhost:3000/dsa/${item.id}`, {
+					method: "DELETE"
 				}).then(renderDSA);
-			};
 
-			editBtn.onclick = () => {
-				const updated = {
-					problem: prompt("Problem:", item.problem),
-					platform: prompt("Platform:", item.platform),
-					difficulty: prompt("Difficulty:", item.difficulty)
-				};
-
-				fetch(`http://localhost:3000/dsa/${item.id}`, {
+			edit.onclick = () =>
+				fetchWithAuth(`http://localhost:3000/dsa/${item.id}`, {
 					method: "PUT",
-					headers: {
-						"Content-Type": "application/json",
-						"Authorization": "Bearer " + getToken()
-					},
-					body: JSON.stringify(updated)
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						problem: prompt("Problem:", item.problem),
+						platform: prompt("Platform:", item.platform),
+						difficulty: prompt("Difficulty:", item.difficulty)
+					})
 				}).then(renderDSA);
-			};
 
 			li.innerHTML = `<strong>${item.problem}</strong><br><small>${item.platform} • ${item.difficulty}</small>`;
-			li.append(editBtn, delBtn);
+			li.append(edit, del);
 			list.appendChild(li);
 		});
 	});
 }
 
-// ===================== RENDER APPLICATIONS =====================
-
 function renderApps() {
-
 	const list = document.getElementById("app-list");
 	list.innerHTML = "";
 
-	fetch("http://localhost:3000/applications", {
-		headers: {
-			"Authorization": "Bearer " + getToken()
-		}
-	})
-	.then(res => res.json())
-	.then(data => {
-
-		if (data.length === 0) {
-			const li = document.createElement("li");
-			li.textContent = "No applications yet";
-			list.appendChild(li);
-			return;
-		}
-
+	fetchWithAuth("http://localhost:3000/applications").then(data => {
 		data.forEach(item => {
 
 			const li = document.createElement("li");
 
-			const editBtn = document.createElement("button");
-			editBtn.textContent = "Edit";
+			const edit = document.createElement("button");
+			const del = document.createElement("button");
 
-			const delBtn = document.createElement("button");
-			delBtn.textContent = "Delete";
+			edit.textContent = "Edit";
+			del.textContent = "Delete";
 
-			delBtn.onclick = () => {
-				fetch(`http://localhost:3000/applications/${item.id}`, {
-					method: "DELETE",
-					headers: {
-						"Authorization": "Bearer " + getToken()
-					}
+			del.onclick = () =>
+				fetchWithAuth(`http://localhost:3000/applications/${item.id}`, {
+					method: "DELETE"
 				}).then(renderApps);
-			};
 
-			editBtn.onclick = () => {
-				const updated = {
-					company: prompt("Company:", item.company),
-					role: prompt("Role:", item.role),
-					status: prompt("Status:", item.status)
-				};
-
-				fetch(`http://localhost:3000/applications/${item.id}`, {
+			edit.onclick = () =>
+				fetchWithAuth(`http://localhost:3000/applications/${item.id}`, {
 					method: "PUT",
-					headers: {
-						"Content-Type": "application/json",
-						"Authorization": "Bearer " + getToken()
-					},
-					body: JSON.stringify(updated)
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						company: prompt("Company:", item.company),
+						role: prompt("Role:", item.role),
+						status: prompt("Status:", item.status)
+					})
 				}).then(renderApps);
-			};
 
 			li.innerHTML = `<strong>${item.company}</strong><br><small>${item.role} • ${item.status}</small>`;
-			li.append(editBtn, delBtn);
+			li.append(edit, del);
 			list.appendChild(li);
 		});
 	});
@@ -405,3 +333,8 @@ function renderApps() {
 
 renderDSA();
 renderApps();
+
+function logout() {
+	localStorage.removeItem("token");
+	window.location.href = "login.html";
+}

@@ -416,7 +416,7 @@ li small {
 		width: 100%;
 	}
 }
-// ===================== ERROR & HINT ===================== */
+/* // ===================== ERROR & HINT =====================  */
 .error {
 	color: red;
 	font-size: 12px;
@@ -467,4 +467,7 @@ li small {
 .hint {
 	margin-top: -5px;
 	margin-bottom: 10px;
+}
+.password-wrapper button {
+	line-height: 1;
 }
