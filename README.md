@@ -10,14 +10,16 @@ It demonstrates real-world full-stack concepts including authentication, API des
 
 ### 🔐 Authentication
 
-* User registration and login
+* User registration and login (email/password)
+* Google OAuth 2.0 login integration
 * Password hashing using bcrypt
-* JWT-based authentication
+* JWT-based authentication system
 * Token expiration handling (expiresIn)
 * Protected routes using middleware
 * User-specific data isolation
 * Automatic logout on token expiry (401 handling)
 * Manual logout functionality
+* Unified auth flow for both Google and email login
 
 ---
 
@@ -37,6 +39,16 @@ It demonstrates real-world full-stack concepts including authentication, API des
 * Update application status
 * Delete entries
 * Organized per-user view
+
+---
+
+### 🎨 UI/UX Improvements
+
+* Clean and responsive authentication UI
+* Password visibility toggle (👁 with animation)
+* Fixed alignment and styling issues
+* Smooth hover interactions
+* Google login button integration
 
 ---
 
@@ -61,6 +73,7 @@ It demonstrates real-world full-stack concepts including authentication, API des
 
 * JSON Web Tokens (JWT)
 * bcrypt (password hashing)
+* Google OAuth 2.0 (google-auth-library)
 
 ---
 
@@ -74,6 +87,7 @@ DevTrack/
 │   └── .env (ignored)
 │
 ├── frontend/
+│   ├── index.html
 │   ├── login.html
 │   ├── register.html
 │   ├── dashboard.html
@@ -108,6 +122,7 @@ Create a `.env` file inside `backend/`:
 
 ```env
 JWT_SECRET=your_secret_key
+GOOGLE_CLIENT_ID=your_google_client_id
 ```
 
 Start the server:
@@ -126,34 +141,69 @@ http://localhost:3000
 
 ### 3️⃣ Frontend Setup
 
-Open directly in browser:
+⚠️ Important: Do NOT open with file://
 
-```text
-frontend/login.html
+Use a local server (recommended):
+
+```bash
+# VS Code Live Server OR
+npx serve frontend
 ```
 
-(No build tools required)
+Then open:
+
+```
+http://localhost:5500/login.html
+```
 
 ---
 
 ## 🔄 How It Works
 
+### Email Login Flow
+
 1. User logs in → JWT token is issued
 2. Token stored in browser (localStorage)
-3. Every API request includes token in Authorization header
-4. Backend verifies token using middleware
+3. Every API request includes token
+4. Backend verifies token
 5. Only authorized user data is returned
+
+---
+
+### Google OAuth Flow
+
+```text
+User clicks "Sign in with Google"
+        ↓
+Google authenticates user
+        ↓
+Frontend receives Google ID token
+        ↓
+Token sent to backend (/auth/google)
+        ↓
+Backend verifies token with Google
+        ↓
+User created/fetched in DB
+        ↓
+Backend issues YOUR JWT
+        ↓
+Same dashboard flow continues
+```
 
 ---
 
 ## 🔐 Authentication Flow
 
 ```text
-Login → JWT Issued (with expiry) → Stored in LocalStorage
+Login (Email / Google)
+        ↓
+JWT Issued (with expiry)
+        ↓
+Stored in LocalStorage
         ↓
 Request with Token → Backend Verifies
         ↓
-Access Granted / Token Expired / Invalid Token
+Access Granted / Token Expired / Invalid
         ↓
 Frontend auto logout on 401
 ```
@@ -163,32 +213,35 @@ Frontend auto logout on 401
 ## ⚡ Key Architectural Highlights
 
 * Centralized API handler (fetchWithAuth)
-* Automatic session management via JWT expiry
+* Unified authentication system (OAuth + JWT)
+* Automatic session management via token expiry
 * Clean separation of frontend and backend concerns
 * User-level data isolation using userId
 * Middleware-based route protection
+* Provider-based auth system (local vs google)
 
 ---
 
 ## 📌 Current Limitations
 
 * No refresh token mechanism
-* No OAuth integration yet
-* Frontend is not using a framework (React/Next.js)
-* Limited validation on some backend routes
+* OAuth limited to Google only
+* Frontend not using a modern framework yet
+* Limited backend validation and sanitization
 
 ---
 
 ## 🚀 Future Improvements
 
-* 🌐 OAuth (Google / GitHub login)
 * 🔁 Refresh tokens for better session handling
+* 🌐 GitHub OAuth integration
 * ⚛️ Migration to Next.js
 * 🐳 Dockerization
 * 📊 Analytics dashboard (streaks, insights)
 * 📄 Pagination & filtering
 * ⚡ Rate limiting & caching
 * 🚀 Deployment (Vercel + backend hosting)
+* 🎨 UI improvements (toasts, loaders, dark mode)
 
 ---
 
@@ -198,11 +251,13 @@ This project demonstrates:
 
 * Full-stack development workflow
 * REST API design
-* Authentication using JWT
+* JWT-based authentication systems
+* OAuth 2.0 integration (Google)
 * Secure password handling with bcrypt
 * MongoDB data modeling with Mongoose
 * Frontend–backend integration
-* Session management and token lifecycle handling
+* Session lifecycle and token management
+* Real-world authentication architecture
 
 ---
 
