@@ -280,3 +280,50 @@ form button:hover {
 .password-wrapper .eye-btn:active {
 	transform: translateY(-50%) scale(0.95);
 }
+/* ===================== DARK MODE ===================== */
+
+body.dark {
+	background: #0f172a;
+	color: #e2e8f0;
+}
+
+body.dark .navbar {
+	background: #020617;
+	border-bottom: 1px solid #1e293b;
+}
+
+body.dark .login-section,
+body.dark .auth-card,
+body.dark .feature-card {
+	background: #1e293b;
+	color: #e2e8f0;
+	border: 1px solid #334155;
+}
+
+body.dark input {
+	background: #020617;
+	color: #e2e8f0;
+	border: 1px solid #334155;
+}
+
+body.dark input::placeholder {
+	color: #64748b;
+}
+
+body.dark .footer {
+	background: #020617;
+	color: #94a3b8;
+}
+#theme-toggle {
+	margin-left: 20px;
+	padding: 6px 10px;
+	border-radius: 6px;
+	border: none;
+	background: #3d6fa8;
+	color: white;
+	cursor: pointer;
+}
+
+#theme-toggle:hover {
+	background: #2c4f82;
+}
