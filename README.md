@@ -49,6 +49,7 @@ It demonstrates real-world full-stack concepts including authentication, API des
 * Fixed alignment and styling issues
 * Smooth hover interactions
 * Google login button integration
+* 🌙 Dark mode toggle with persistent theme (localStorage)
 
 ---
 
@@ -219,6 +220,7 @@ Frontend auto logout on 401
 * User-level data isolation using userId
 * Middleware-based route protection
 * Provider-based auth system (local vs google)
+* Persistent UI state management (dark mode via localStorage)
 
 ---
 
@@ -241,7 +243,7 @@ Frontend auto logout on 401
 * 📄 Pagination & filtering
 * ⚡ Rate limiting & caching
 * 🚀 Deployment (Vercel + backend hosting)
-* 🎨 UI improvements (toasts, loaders, dark mode)
+* 🎨 UI improvements (toasts, loaders, system theme detection)
 
 ---
 
@@ -258,6 +260,7 @@ This project demonstrates:
 * Frontend–backend integration
 * Session lifecycle and token management
 * Real-world authentication architecture
+* UI state persistence (dark mode)
 
 ---
 

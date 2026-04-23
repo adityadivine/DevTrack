@@ -378,7 +378,7 @@ function handleGoogleLogin(response) {
 }
 
 // ===================== DARK MODE =====================
-
+// Toggle dark mode and save preference in localStorage
 document.addEventListener("DOMContentLoaded", () => {
 
 	const toggleBtn = document.getElementById("theme-toggle");
