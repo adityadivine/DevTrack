@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,91 +9,106 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
+	<script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
-	<!-- ===================== NAVBAR ===================== -->
-	<header class="navbar">
-		<div class="nav-container">
-			<div class="logo">🚀 Dev<span>Track</span></div>
-			<nav>
-				<a href="index.html">Home</a>
-				<button id="theme-toggle">🌙</button>
+<header class="navbar">
+	<div class="nav-container">
+		<div class="logo">🚀 Dev<span>Track</span></div>
+		<nav>
+			<a href="index.html">Home</a>
+			<button id="theme-toggle">🌙</button>
+			<a href="login.html">Login</a>
+		</nav>
+	</div>
+</header>
+
+<main class="auth-page">
+
+	<div class="auth-container">
+
+		<!-- LEFT SIDE -->
+		<div class="auth-info">
+			<h1>Join DevTrack</h1>
+			<p>
+				Track your DSA progress, manage job applications, and stay consistent.
+			</p>
+
+			<ul class="auth-points">
+				<li>✔ Track problems daily</li>
+				<li>✔ Organize applications</li>
+				<li>✔ Stay consistent & focused</li>
+			</ul>
+		</div>
+
+		<!-- RIGHT SIDE -->
+		<div class="auth-card">
+
+			<h2>Create Account</h2>
+
+			<!-- GOOGLE SIGNUP -->
+			<div id="google-btn" style="margin-bottom: 15px;"></div>
+
+			<div class="divider">
+				<span>or continue with email</span>
+			</div>
+
+			<form id="register-form">
+
+				<label>Name</label>
+				<input type="text" id="name" required placeholder="John Doe">
+				<small id="name-error" class="error"></small>
+
+				<label>Email</label>
+				<input type="email" id="email" required placeholder="john@example.com">
+				<small id="email-error" class="error"></small>
+
+				<label>Password</label>
+				<div class="password-wrapper">
+					<input type="password" id="password" required placeholder="Enter password">
+					<button type="button" class="eye-btn" id="toggle-password">👁</button>
+				</div>
+
+				<small id="password-strength" class="hint"></small>
+				<small id="password-error" class="error"></small>
+
+				<label>Confirm Password</label>
+				<div class="password-wrapper">
+					<input type="password" id="confirm-password" required placeholder="Confirm password">
+					<button type="button" class="eye-btn" id="toggle-confirm">👁</button>
+				</div>
+
+				<small id="confirm-error" class="error"></small>
+
+				<!-- TERMS -->
+				<div class="terms">
+					<input type="checkbox" id="terms" required>
+					<label for="terms">
+						I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>
+					</label>
+				</div>
+
+				<button type="submit" class="primary-btn">Create Account</button>
+
+			</form>
+
+			<p class="auth-switch">
+				Already have an account?
 				<a href="login.html">Login</a>
-			</nav>
-		</div>
-	</header>
-
-
-	<!-- ===================== AUTH SECTION ===================== -->
-	<main class="auth-page">
-
-		<div class="auth-container">
-
-			<!-- Left Side (Branding) -->
-			<div class="auth-info">
-				<h1>Join DevTrack</h1>
-				<p>
-					Start tracking your DSA progress and job applications in one place.
-					Stay consistent and level up your career.
-				</p>
-			</div>
-
-			<!-- Right Side (Form) -->
-			<div class="auth-card">
-				<h2>Create Account</h2>
-
-				
-				<form id="register-form">
-
-					<label>Name</label>
-					<input type="text" id="name" required placeholder="John Doe">
-					<small id="name-error" class="error"></small>
-
-					<label>Email</label>
-					<input type="email" id="email" required placeholder="john@example.com">
-					<small id="email-error" class="error"></small>
-
-					<label>Password</label>
-					<div class="password-wrapper">
-						<input type="password" id="password" required placeholder="Enter password">
-						<button type="button" class="eye-btn" id="toggle-password">👁</button>
-					</div>
-
-					<small class="hint">
-						Password must be at least 8 characters and include letters and numbers
-					</small>
-					<small id="password-error" class="error"></small>
-
-					<label>Confirm Password</label>
-					<div class="password-wrapper">
-						<input type="password" id="confirm-password" required placeholder="Confirm password">
-						<button type="button" class="eye-btn" id="toggle-confirm">👁</button>
-					</div>
-
-					<small id="confirm-error" class="error"></small>
-
-					<button type="submit">Register</button>
-				</form>
-
-
-
-				<p class="auth-switch">
-					Already have an account?
-					<a href="login.html">Login</a>
-				</p>
-			</div>
+			</p>
 
 		</div>
 
-	</main>
+	</div>
 
+</main>
 
-	<!-- ===================== FOOTER ===================== -->
-	<footer class="footer">
-		<p>© 2026 DevTrack</p>
-	</footer>
+<footer class="footer">
+	<p>© 2026 DevTrack</p>
+</footer>
 
-	<script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
+```

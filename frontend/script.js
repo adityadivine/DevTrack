@@ -14,6 +14,7 @@ function isStrongPassword(password) {
 function getToken() {
 	return localStorage.getItem("token");
 }
+document.getElementById("total-dsa").textContent = data.length;
 
 // ===================== API HANDLER =====================
 
