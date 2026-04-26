@@ -2,7 +2,7 @@
 
 DevTrack is a full-stack web application designed to help developers track their Data Structures & Algorithms (DSA) progress and job applications in one place.
 
-It demonstrates real-world full-stack concepts including authentication, API design, and user-specific data management.
+It demonstrates real-world full-stack concepts including authentication, API design, and user-specific data management. Below mentioned are the features:
 
 ---
 
