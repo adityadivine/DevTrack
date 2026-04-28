@@ -1,8 +1,20 @@
 # 🚀 DevTrack
 
-DevTrack is a full-stack web application designed to help developers track their Data Structures & Algorithms (DSA) progress and job applications in one place.
+DevTrack is a full-stack developer productivity application that helps users track their DSA progress and job applications in one place.
 
-It demonstrates real-world full-stack concepts including authentication, API design, and user-specific data management. Below mentioned are the features:
+Built with a focus on real-world architecture, it demonstrates modern authentication systems, API design, and clean frontend–backend integration.
+
+---
+
+## 🌟 Why DevTrack?
+
+Preparing for placements requires consistency and organization.
+
+DevTrack solves this by providing:
+
+* A structured way to track DSA problems
+* A centralized job application tracker
+* A clean dashboard to monitor progress
 
 ---
 
@@ -11,7 +23,7 @@ It demonstrates real-world full-stack concepts including authentication, API des
 ### 🔐 Authentication
 
 * User registration and login (email/password)
-* Google OAuth 2.0 login integration
+* Google OAuth 2.0 integration
 * Password hashing using bcrypt
 * JWT-based authentication system
 * Token expiration handling (expiresIn)
@@ -19,17 +31,16 @@ It demonstrates real-world full-stack concepts including authentication, API des
 * User-specific data isolation
 * Automatic logout on token expiry (401 handling)
 * Manual logout functionality
-* Unified auth flow for both Google and email login
+* Unified auth flow (Google + email)
 
 ---
 
 ### 📊 DSA Tracker
 
 * Add problems (name, platform, difficulty)
-* Edit entries
-* Delete entries
+* Edit and delete entries
 * View all solved problems
-* Data scoped to logged-in user
+* Data scoped per user
 
 ---
 
@@ -42,14 +53,16 @@ It demonstrates real-world full-stack concepts including authentication, API des
 
 ---
 
-### 🎨 UI/UX Improvements
+### 🎨 UI/UX
 
-* Clean and responsive authentication UI
-* Password visibility toggle (👁 with animation)
-* Fixed alignment and styling issues
+* Clean, responsive interface
+* SaaS-style authentication pages
+* Password visibility toggle (👁)
 * Smooth hover interactions
-* Google login button integration
-* 🌙 Dark mode toggle with persistent theme (localStorage)
+* Google login integration
+* 🌙 Dark mode with persistence (localStorage)
+* Sticky glassmorphism navbar
+* Premium multi-column footer
 
 ---
 
@@ -72,9 +85,9 @@ It demonstrates real-world full-stack concepts including authentication, API des
 
 ### Authentication
 
-* JSON Web Tokens (JWT)
-* bcrypt (password hashing)
-* Google OAuth 2.0 (google-auth-library)
+* JWT (JSON Web Tokens)
+* bcrypt
+* Google OAuth 2.0
 
 ---
 
@@ -85,7 +98,7 @@ DevTrack/
 ├── backend/
 │   ├── server.js
 │   ├── package.json
-│   └── .env (ignored)
+│   └── .env
 │
 ├── frontend/
 │   ├── index.html
@@ -119,20 +132,20 @@ cd backend
 npm install
 ```
 
-Create a `.env` file inside `backend/`:
+Create `.env` file:
 
 ```env
 JWT_SECRET=your_secret_key
 GOOGLE_CLIENT_ID=your_google_client_id
 ```
 
-Start the server:
+Start server:
 
 ```bash
 npm run dev
 ```
 
-Server runs on:
+Runs on:
 
 ```
 http://localhost:3000
@@ -142,16 +155,13 @@ http://localhost:3000
 
 ### 3️⃣ Frontend Setup
 
-⚠️ Important: Do NOT open with file://
-
-Use a local server (recommended):
+⚠️ Do NOT use file://
 
 ```bash
-# VS Code Live Server OR
 npx serve frontend
 ```
 
-Then open:
+Open:
 
 ```
 http://localhost:5500/login.html
@@ -161,34 +171,32 @@ http://localhost:5500/login.html
 
 ## 🔄 How It Works
 
-### Email Login Flow
+### Email Authentication
 
-1. User logs in → JWT token is issued
-2. Token stored in browser (localStorage)
-3. Every API request includes token
+1. User logs in → JWT issued
+2. Token stored in localStorage
+3. Token sent with API requests
 4. Backend verifies token
-5. Only authorized user data is returned
+5. Authorized data returned
 
 ---
 
 ### Google OAuth Flow
 
 ```text
-User clicks "Sign in with Google"
+User clicks Google Login
         ↓
 Google authenticates user
         ↓
-Frontend receives Google ID token
+Frontend receives ID token
         ↓
-Token sent to backend (/auth/google)
+Backend verifies token
         ↓
-Backend verifies token with Google
+User created/fetched
         ↓
-User created/fetched in DB
+JWT issued
         ↓
-Backend issues YOUR JWT
-        ↓
-Same dashboard flow continues
+User logged in
 ```
 
 ---
@@ -198,52 +206,48 @@ Same dashboard flow continues
 ```text
 Login (Email / Google)
         ↓
-JWT Issued (with expiry)
+JWT Issued
         ↓
 Stored in LocalStorage
         ↓
-Request with Token → Backend Verifies
+Request → Backend verifies
         ↓
-Access Granted / Token Expired / Invalid
-        ↓
-Frontend auto logout on 401
+Access / Expiry handling
 ```
 
 ---
 
-## ⚡ Key Architectural Highlights
+## ⚡ Architecture Highlights
 
-* Centralized API handler (fetchWithAuth)
-* Unified authentication system (OAuth + JWT)
-* Automatic session management via token expiry
-* Clean separation of frontend and backend concerns
-* User-level data isolation using userId
+* Centralized API handler (`fetchWithAuth`)
+* Unified auth system (OAuth + JWT)
+* Stateless session management
 * Middleware-based route protection
-* Provider-based auth system (local vs google)
-* Persistent UI state management (dark mode via localStorage)
+* User-level data isolation
+* Persistent UI state (dark mode)
+* Clean separation of concerns
 
 ---
 
 ## 📌 Current Limitations
 
-* No refresh token mechanism
-* OAuth limited to Google only
-* Frontend not using a modern framework yet
-* Limited backend validation and sanitization
+* No refresh token system
+* OAuth limited to Google
+* No frontend framework yet
+* Basic backend validation
 
 ---
 
 ## 🚀 Future Improvements
 
-* 🔁 Refresh tokens for better session handling
-* 🌐 GitHub OAuth integration
-* ⚛️ Migration to Next.js
-* 🐳 Dockerization
-* 📊 Analytics dashboard (streaks, insights)
-* 📄 Pagination & filtering
-* ⚡ Rate limiting & caching
-* 🚀 Deployment (Vercel + backend hosting)
-* 🎨 UI improvements (toasts, loaders, system theme detection)
+* Refresh tokens
+* GitHub OAuth
+* Next.js migration
+* Docker support
+* Analytics dashboard (streaks, insights)
+* Pagination & filtering
+* Rate limiting & caching
+* Deployment (Vercel + backend hosting)
 
 ---
 
@@ -253,14 +257,13 @@ This project demonstrates:
 
 * Full-stack development workflow
 * REST API design
-* JWT-based authentication systems
-* OAuth 2.0 integration (Google)
-* Secure password handling with bcrypt
-* MongoDB data modeling with Mongoose
+* JWT authentication systems
+* OAuth integration
+* Secure password handling
+* MongoDB data modeling
 * Frontend–backend integration
-* Session lifecycle and token management
-* Real-world authentication architecture
-* UI state persistence (dark mode)
+* Session lifecycle handling
+* Real-world system design fundamentals
 
 ---
 
@@ -270,6 +273,6 @@ Aditya Raj
 
 ---
 
-## ⭐ If you found this useful
+## ⭐ Support
 
-Give it a star ⭐ and feel free to explore or contribute!
+If you found this useful, consider giving it a star ⭐
