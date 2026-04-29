@@ -1,4 +1,4 @@
-# DevTrack Project — Complete Learning Notes
+# DevTrack Project: Complete Learning Notes
 
 ---
 
