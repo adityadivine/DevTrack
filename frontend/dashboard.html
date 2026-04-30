@@ -5,158 +5,121 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>DevTrack Dashboard</title>
+
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ===================== NAVBAR ===================== -->
-<header class="navbar">
-	<div class="nav-container">
+<div class="layout">
 
-		<div class="logo">🚀 Dev<span>Track</span></div>
+	<!-- ===================== SIDEBAR ===================== -->
+	<aside class="sidebar">
 
-		<nav class="nav-links">
-			<a href="#" class="nav-item active">Dashboard</a>
-			<button id="theme-toggle" class="nav-btn">🌙</button>
-			<button class="nav-cta logout-btn" onclick="logout()">Logout</button>
+		<div class="sidebar-logo">
+			🚀 Dev<span>Track</span>
+		</div>
+
+		<nav class="sidebar-nav">
+			<a class="active">Dashboard</a>
+			<a>DSA Tracker</a>
+			<a>Applications</a>
 		</nav>
 
-	</div>
-</header>
-
-<main class="dashboard">
-
-	<div class="container">
-
-		<!-- ===================== STATS ===================== -->
-		<section class="stats">
-			<div class="stat-card">
-				<h3 id="total-dsa">0</h3>
-				<p>Problems Solved</p>
-			</div>
-			<div class="stat-card">
-				<h3 id="total-apps">0</h3>
-				<p>Applications</p>
-			</div>
-		</section>
-
-		<!-- ===================== FORMS ===================== -->
-		<section class="forms-section">
-
-			<div class="card">
-				<h2>Add DSA Entry</h2>
-
-				<form id="dsa-form">
-					<input type="text" id="problem" required placeholder="Problem (e.g., Two Sum)">
-					<input type="text" id="platform" required placeholder="Platform (e.g., LeetCode)">
-
-					<select id="difficulty" required>
-						<option value="">Difficulty</option>
-						<option>Easy</option>
-						<option>Medium</option>
-						<option>Hard</option>
-					</select>
-
-					<button type="submit">Add Entry</button>
-				</form>
-			</div>
-
-			<div class="card">
-				<h2>Add Application</h2>
-
-				<form id="app-form">
-					<input type="text" id="company" required placeholder="Company">
-					<input type="text" id="role" required placeholder="Role">
-
-					<select id="status" required>
-						<option value="">Status</option>
-						<option>Applied</option>
-						<option>OA</option>
-						<option>Interview</option>
-					</select>
-
-					<button type="submit">Add Application</button>
-				</form>
-			</div>
-
-		</section>
-
-		<!-- ===================== DATA ===================== -->
-		<section class="data-section">
-
-			<div class="card">
-				<h2>DSA Entries</h2>
-				<ul id="dsa-list"></ul>
-				<p class="empty" id="dsa-empty">No problems added yet 🚀</p>
-			</div>
-
-			<div class="card">
-				<h2>Applications</h2>
-				<ul id="app-list"></ul>
-				<p class="empty" id="app-empty">No applications yet 💼</p>
-			</div>
-
-		</section>
-
-	</div>
-</main>
-
-
-<footer class="footer">
-
-	<div class="footer-container">
-
-		<!-- BRAND -->
-		<div class="footer-col">
-			<h3>🚀 DevTrack</h3>
-			<p class="footer-desc">
-				Track your DSA journey, manage applications, and stay consistent.
-			</p>
-
-			<div class="footer-socials">
-				<a href="#">GitHub</a>
-				<a href="#">LinkedIn</a>
-				<a href="#">Twitter</a>
-			</div>
+		<div class="sidebar-bottom">
+			<button id="theme-toggle" class="nav-btn">🌙</button>
+			<button class="logout-btn" onclick="logout()">Logout</button>
 		</div>
 
-		<!-- PRODUCT -->
-		<div class="footer-col">
-			<h4>Product</h4>
-			<ul>
-				<li><a href="#features">Features</a></li>
-				<li><a href="#login">Login</a></li>
-				<li><a href="register.html">Register</a></li>
-			</ul>
+	</aside>
+
+
+	<!-- ===================== MAIN ===================== -->
+	<main class="main">
+
+		<div class="container">
+
+			<!-- HEADER -->
+			<div class="dashboard-header">
+				<h1>Dashboard</h1>
+				<p>Track your progress and stay consistent 🚀</p>
+			</div>
+
+			<!-- STATS -->
+			<section class="stats">
+				<div class="stat-card">
+					<p>Problems Solved</p>
+					<h3 id="total-dsa">0</h3>
+				</div>
+				<div class="stat-card">
+					<p>Applications</p>
+					<h3 id="total-apps">0</h3>
+				</div>
+			</section>
+
+			<!-- FORMS -->
+			<section class="forms-section">
+
+				<div class="card form-card">
+					<h2>Add DSA</h2>
+
+					<form id="dsa-form">
+						<input type="text" id="problem" placeholder="Problem">
+						<input type="text" id="platform" placeholder="Platform">
+
+						<select id="difficulty">
+							<option value="">Difficulty</option>
+							<option>Easy</option>
+							<option>Medium</option>
+							<option>Hard</option>
+						</select>
+
+						<button type="submit">Add</button>
+					</form>
+				</div>
+
+				<div class="card form-card">
+					<h2>Add Application</h2>
+
+					<form id="app-form">
+						<input type="text" id="company" placeholder="Company">
+						<input type="text" id="role" placeholder="Role">
+
+						<select id="status">
+							<option value="">Status</option>
+							<option>Applied</option>
+							<option>OA</option>
+							<option>Interview</option>
+						</select>
+
+						<button type="submit">Add</button>
+					</form>
+				</div>
+
+			</section>
+
+			<!-- DATA -->
+			<section class="data-section">
+
+				<div class="card data-card">
+					<h2>DSA Progress</h2>
+					<ul id="dsa-list" class="list"></ul>
+					<p class="empty" id="dsa-empty">No problems yet 🚀</p>
+				</div>
+
+				<div class="card data-card">
+					<h2>Applications</h2>
+					<ul id="app-list" class="list"></ul>
+					<p class="empty" id="app-empty">No applications yet 💼</p>
+				</div>
+
+			</section>
+
 		</div>
 
-		<!-- RESOURCES -->
-		<div class="footer-col">
-			<h4>Resources</h4>
-			<ul>
-				<li><a href="#">Documentation</a></li>
-				<li><a href="#">Help Center</a></li>
-				<li><a href="#">Privacy Policy</a></li>
-			</ul>
-		</div>
+	</main>
 
-		<!-- CONTACT -->
-		<div class="footer-col">
-			<h4>Contact</h4>
-			<p>Email: support@devtrack.com</p>
-			<p>Chennai, India</p>
-		</div>
-
-	</div>
-
-	<div class="footer-bottom">
-		<p>© 2026 DevTrack • Built by Aditya Raj</p>
-	</div>
-
-</footer>
-
-
+</div>
 
 <script src="script.js"></script>
 </body>
