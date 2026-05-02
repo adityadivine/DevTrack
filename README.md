@@ -6,7 +6,7 @@ Built with a focus on real-world architecture, it demonstrates modern authentica
 
 ---
 
-## 🌟 Why DevTrack?
+##  Why DevTrack?
 
 Preparing for placements requires consistency and organization.
 
@@ -18,9 +18,9 @@ DevTrack solves this by providing:
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🔐 Authentication
+###  Authentication
 
 * User registration and login (email/password)
 * Google OAuth 2.0 integration
@@ -44,7 +44,7 @@ DevTrack solves this by providing:
 
 ---
 
-### 💼 Application Tracker
+###  Application Tracker
 
 * Track job applications
 * Update application status
@@ -53,7 +53,7 @@ DevTrack solves this by providing:
 
 ---
 
-### 🎨 UI/UX
+###  UI/UX
 
 * Clean, responsive interface
 * SaaS-style authentication pages
@@ -66,7 +66,7 @@ DevTrack solves this by providing:
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 ### Frontend
 
@@ -91,7 +91,7 @@ DevTrack solves this by providing:
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```bash
 DevTrack/
