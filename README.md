@@ -35,7 +35,7 @@ DevTrack solves this by providing:
 
 ---
 
-### 📊 DSA Tracker
+###  DSA Tracker
 
 * Add problems (name, platform, difficulty)
 * Edit and delete entries
@@ -60,7 +60,7 @@ DevTrack solves this by providing:
 * Password visibility toggle (👁)
 * Smooth hover interactions
 * Google login integration
-* 🌙 Dark mode with persistence (localStorage)
+* Dark mode with persistence (localStorage)
 * Sticky glassmorphism navbar
 * Premium multi-column footer
 
@@ -116,7 +116,7 @@ DevTrack/
 
 ## ⚙️ Setup Instructions
 
-### 1️⃣ Clone the repository
+### Clone the repository
 
 ```bash
 git clone https://github.com/adityadivine/DevTrack.git
@@ -125,7 +125,7 @@ cd DevTrack
 
 ---
 
-### 2️⃣ Backend Setup
+### Backend Setup
 
 ```bash
 cd backend
@@ -153,7 +153,7 @@ http://localhost:3000
 
 ---
 
-### 3️⃣ Frontend Setup
+### Frontend Setup
 
 ⚠️ Do NOT use file://
 
@@ -169,7 +169,7 @@ http://localhost:5500/login.html
 
 ---
 
-## 🔄 How It Works
+## How It Works
 
 ### Email Authentication
 
@@ -201,7 +201,7 @@ User logged in
 
 ---
 
-## 🔐 Authentication Flow
+## Authentication Flow
 
 ```text
 Login (Email / Google)
@@ -217,7 +217,7 @@ Access / Expiry handling
 
 ---
 
-## ⚡ Architecture Highlights
+## Architecture Highlights
 
 * Centralized API handler (`fetchWithAuth`)
 * Unified auth system (OAuth + JWT)
@@ -229,7 +229,7 @@ Access / Expiry handling
 
 ---
 
-## 📌 Current Limitations
+## Current Limitations
 
 * No refresh token system
 * OAuth limited to Google
@@ -238,7 +238,7 @@ Access / Expiry handling
 
 ---
 
-## 🚀 Future Improvements
+## Future Improvements
 
 * Refresh tokens
 * GitHub OAuth
@@ -251,7 +251,7 @@ Access / Expiry handling
 
 ---
 
-## 📈 Learning Outcomes
+## Learning Outcomes
 
 This project demonstrates:
 
@@ -267,12 +267,12 @@ This project demonstrates:
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 Aditya Raj
 
 ---
 
-## ⭐ Support
+## Support
 
 If you found this useful, consider giving it a star ⭐
